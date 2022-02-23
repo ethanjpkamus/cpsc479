@@ -31,7 +31,7 @@ int main( int argc, char *argv[] )
 //		starttime *= precision;
 //		endtime *= precision;
 		printf("start: %f\nend: %f\n", starttime, endtime);
-		printf("Total Time: %f\n", endtime-starttime);
+		printf("Total Time: %f (seconds)\n", endtime-starttime);
 	} else if (rank == 1) {
 		//receive from 0
 		MPI_Recv(&a, 1, MPI_FLOAT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
