@@ -23,12 +23,14 @@ int main( int argc, char *argv[] )
 		
 		//receive from 1
 		MPI_Irecv(&a, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		//wait here!
 		printf("P_0 received a: %d from P_1\n", a);
 		endtime = MPI_Wtime();
 		printf("The total time is %d\n", endtime - starttime);
 	} else if (rank == 1) {
 		//receive from 0
 		MPI_Irecv(&a, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		//wait here!
 		printf("P_1 received a: %d P_0\n", a);
 		
 		//send to 0
