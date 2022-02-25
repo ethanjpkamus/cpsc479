@@ -10,7 +10,7 @@ int main( int argc, char *argv[] )
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 	MPI_Comm_size( MPI_COMM_WORLD, &size );
 	
-	float a = 3;
+	float a = 479;
 	starttime = MPI_Wtime();
 	if (rank == 0) {
 		printf("\n=== BEGIN BLOCKING TRANSMISSIONS (2 TRANSMISSIONS) ===\n");
@@ -22,9 +22,8 @@ int main( int argc, char *argv[] )
 		//receive from 1
 		MPI_Recv(&a, 1, MPI_FLOAT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 		printf("P_0 received %f from P_1\n", a);
+		
 		endtime = MPI_Wtime();
-
-		// printf("start: %f\nend: %f\n", starttime, endtime);
 		printf("Total Time: %f (seconds)\n", endtime-starttime);
 	} else if (rank == 1) {
 		//receive from 0
