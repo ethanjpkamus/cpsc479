@@ -15,15 +15,14 @@ int main( int argc, char *argv[] )
 	// === blocking transmission ===
 	starttime = MPI_Wtime();
 	if (rank == 0) {
-		printf("\n=== BEGIN BLOCKING TRANSMISSION ===\n");
 		MPI_Send(&a, 1, MPI_FLOAT, 1, 0, MPI_COMM_WORLD);
 		printf("P_0 sent %f to P_1\n", a);
 	} else if (rank == 1) {
 		MPI_Recv(&a, 1, MPI_FLOAT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-		
+
 		endtime = MPI_Wtime();
 		printf("P_1 received %f from P_0\n", a);
-		printf("Total Time: %f (seconds)\n", endtime-starttime);
+		printf("Total Time: %f (seconds)\n\n", endtime-starttime);
 	}
 	
 	MPI_Finalize();

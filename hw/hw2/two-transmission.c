@@ -13,18 +13,16 @@ int main( int argc, char *argv[] )
 	float a = 479;
 	starttime = MPI_Wtime();
 	if (rank == 0) {
-		printf("\n=== BEGIN BLOCKING TRANSMISSIONS (2 TRANSMISSIONS) ===\n");
-		
 		//send to 1
 		MPI_Send(&a, 1, MPI_FLOAT, 1, 0, MPI_COMM_WORLD);
 		printf("P_0 sent %f to P_1\n", a);
 		
 		//receive from 1
 		MPI_Recv(&a, 1, MPI_FLOAT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-		printf("P_0 received %f from P_1\n", a);
 		
 		endtime = MPI_Wtime();
-		printf("Total Time: %f (seconds)\n", endtime-starttime);
+		printf("P_0 received %f from P_1\n", a);
+		printf("Total Time: %f (seconds)\n\n", endtime-starttime);
 	} else if (rank == 1) {
 		//receive from 0
 		MPI_Recv(&a, 1, MPI_FLOAT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
