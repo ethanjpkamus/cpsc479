@@ -15,16 +15,18 @@ int main( int argc, char *argv[] )
     // int recv[n];
     int send[] = {3,1,7,1,4,1,6,3};
     int recv[] = {0,0,0,0,0,0,0,0};
+    int r;
 	
-    MPI_Scan(&send, &recv, n, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+    MPI_Scan(&send[rank], &r, n, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
     
-    // print recv for the sake of testing (dont include in the final program)
-    printf("i am rank %d with [", rank);
-    for(int i = 0; i < n-2; ++i) {
-        printf("%d, ", recv[i]);
-    }
-    printf("%d]\n",recv[n-1]);
 
+    // print recv for the sake of testing (dont include in the final program)
+    // printf("i am rank %d with [", rank);
+    // for(int i = 0; i < n-2; ++i) {
+    //     printf("%d, ", recv[i]);
+    // }
+    // printf("%d]\n",recv[n-1]);
+    printf("i am process %d and recieve range: %d - %d\n", rank, (r-send[rank])+1, r);
 	MPI_Finalize();
 	return 0;
 }
