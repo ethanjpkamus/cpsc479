@@ -2,14 +2,23 @@
 #include <stdio.h>
 #include <omp.h>
 #include <stdlib.h>
+#define N 32
 
 int main(int argc, char **argv)
 {
-    int a[100];
-    #pragma omp parallel for
-    for (int i = 0; i < 100; i++) {
-        a[i] = 2 * i;
-        printf("assigning i=%d\n", i);
+    int array[N];
+    int i, tid;
+
+    #pragma omp parallel private(i, tid) shared(array) num_threads(8)
+    {
+        tid = omp_get_thread_num();
+
+        #pragma omp for
+        for (i = 0; i < N; i++)
+        {
+            array[i] = i;
+            printf("thread %d assigning %d to array[%d]\n",tid, array[i], i);
+        }
     }
     return 0;
 }
