@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 {
     int array[N];
     int i, tid;
-
+    
     #pragma omp parallel private(i, tid) shared(array) num_threads(8)
     {
         tid = omp_get_thread_num();
